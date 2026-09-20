@@ -1,0 +1,6 @@
+{
+  "name": "نظام إدارة الصيانة الشامل - CMMS",
+  "description": "نظام إلكتروني متكامل لإدارة طلبات الصيانة والأصول والفنيين وسجلات الصيانة والتقارير والصلاحيات",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

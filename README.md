@@ -1,69 +1,80 @@
-🐄 Akbeitara (أكبيطرة الذكية) - Smart Cattle Herd & Farm Management System
-1. Project Description: Concept & Core Objectives
-Akbeitara is a comprehensive, full-stack smart dairy and beef cattle herd management platform designed for modern livestock farmers, agricultural supervisors, and veterinary doctors.
-Key Objectives:
-Full Lifecycle & Pedigree Tracking: Records each animal's profile from birth/purchase to sale/death, storing international RFID codes, ear-tag IDs, breed, lineage, age, weight, and reproductive states.
-Production & Reproductive Monitoring: Tracks estrus cycles, artificial insemination dates, gestation milestones, calving, and daily milk yields per cow.
-AI Veterinary Clinical Assistant (Gemini): Integrates Google Gemini AI to analyze clinical symptoms in real time, suggest differential veterinary diagnoses, and recommend nutritional rations.
-Dedicated Field Visits & Veterinary Campaigns Portal: Connects national/regional agricultural directorates with local farm breeders to schedule vaccination campaigns and veterinary visits, displaying full breeder contact info (phone number, national ID, and physical address).
-Multi-Role Access Control (RBAC): Enforces role permissions between Super Admin / Veterinary Officers and Farm Breeders.
-Financial & Operational Intelligence: Auto-calculates herd valuations, operating costs, milk revenues, and net farm margins.
-2. Tech Stack
-Frontend Framework: React 19 & TypeScript
-Styling & Design System: Tailwind CSS v4
-Animations & Icons: Motion (motion/react) & Lucide React
-Backend Server: Node.js with Express 4
-Build Tooling & Bundling: Vite 6, tsx, and esbuild
-Database & Cloud Storage: Firebase Cloud Firestore (featuring real-time data sync, automated data cleaning to prevent undefined values, and offline localStorage fallback)
-Artificial Intelligence: Google Gemini API (@google/genai TypeScript SDK)
-3. Setup Guide: Installation & Database Seeding
-Prerequisites
-Node.js (v18.0.0 or higher)
-npm (v9+) or yarn / pnpm
-A Google Gemini API Key from Google AI Studio
-(Optional) A Firebase Project with Cloud Firestore enabled
-Step 1: Clone the Repository
+🏭 Computerized Maintenance Management System (CMMS)
+Industrial Maintenance, Asset Lifecycle & Workshop Management Platform
+1. Project Description
+CMMS (Computerized Maintenance Management System) is an enterprise-grade industrial maintenance operations platform designed for manufacturing plants, production facilities, and industrial factories. It digitizes the entire lifecycle of breakdown and preventive maintenance requests, enforcing a strict chain-of-command workflow between departments:
+Strict Multi-Role Lifecycle Workflow:
+Requester / Operator: Submits maintenance tickets with fault classification, priority, downtime urgency, and photo attachments.
+Maintenance Manager: Triage and technical assignment, dispatching tasks to specialized technicians or escalating to external workshops.
+Technician Execution: Work execution logs, diagnostic reports, breakdown categories, labor hours, and spare parts inventory usage.
+Manager Post-Repair Inspection & Sign-off: The maintenance manager inspects the completed repair, verifies safety and technical standards, and applies an official sign-off.
+Requester Final Acceptance & Closure: Only the original machine operator/requester has the authority to test the machine, evaluate the service quality, and close the request.
+External Workshop Delegation Workflow: Full procurement authorization flow with approvals from both the Maintenance Manager and the General Manager, complete with quotation tracking and external invoice reconciliation.
+Interactive Factory Digital Twin: Real-time production floor layout visualizer displaying machine status (Working, Under Maintenance, Critical Breakdown, Idle) with instant click-to-view diagnostics.
+Spare Parts & Inventory Cost Engine: Real-time parts deduction, minimum reorder thresholds, and automated synchronization with machine lifetime maintenance cost records.
+Official Bilingual PDF Printouts: Generates compliant maintenance reports, spare part requisition receipts, and equipment historical inspection logs.
+2. Tech Stack & Architecture
+Component	Technology	Description
+Frontend Framework	React 18 + TypeScript	Strongly typed, reactive user interface built for high-density industrial control panels.
+Styling & UI	Tailwind CSS + Lucide Icons	Industrial design system with responsive layouts, accessible contrast, and RTL (Arabic/English) support.
+Motion & Animations	Framer Motion (motion/react)	Fluid page transitions, modal drawers, and status badge interactions.
+Data Analytics & Charts	Recharts + D3.js	MTTR / MTBF calculations, monthly breakdown trends, technician productivity curves, and Pareto breakdown charts.
+PDF Engine	HTML-to-Print / Vector CSS	High-fidelity industrial work order printouts and equipment maintenance passports.
+Backend & Runtime	Node.js + Express (Fullstack)	RESTful API endpoints for asset data, technician routing, and workflow state transitions.
+Database & Persistence	Relational Schema / State Engine	Normalized schemas for Assets, Work Orders, Parts Inventory, Workflow Audits, and Notifications.
+3. Installation & Database Seeding Steps
+Follow these steps to clone, configure, install dependencies, and run the project locally:
+Step 1: Prerequisites
+Make sure you have installed:
+Node.js (v18.0.0 or higher recommended)
+npm (v9+ or yarn / pnpm)
+Git
+Step 2: Clone the Repository
 code
 Bash
-git clone <YOUR_GITHUB_REPO_URL>
-cd akbeitara-farm-management
-Step 2: Install Dependencies
+git clone https://github.com/your-username/industrial-cmms.git
+cd industrial-cmms
+Step 3: Install Dependencies
 code
 Bash
 npm install
-Step 3: Configure Environment Variables
-Create a .env file in the root directory by copying .env.example:
+Step 4: Environment Configuration
+Create a .env file in the root directory (or copy from .env.example):
 code
 Bash
 cp .env.example .env
-Fill in your credentials:
+Define any necessary environment variables:
 code
 Env
-# Google Gemini API Key for AI Vet Doctor
-GEMINI_API_KEY="your_gemini_api_key_here"
-
-# Application URL
-APP_URL="http://localhost:3000"
-Step 4: Database Setup (Firebase Cloud Firestore)
-The application comes pre-equipped with an automated synchronization and seeding module:
-Open the application in your browser and click on the Cloud / Database icon in the sidebar.
-Enter your Firebase project credentials (apiKey, projectId, appId, etc.).
-The platform will automatically structure and populate the Firestore database collections:
-farms: Cattle farms mapped to Syrian governorates and districts.
-cows: Cattle records, RFID tags, lactation cycles, and health data.
-events: Vaccinations, veterinary treatments, inseminations, and milk records.
-users: Registered breeders with phones, national IDs, and addresses.
-visitAnnouncements: Field visit campaigns and attendee registrations.
-notifications: Breeder registration approval requests.
-Step 5: Run the Development Server
+PORT=3000
+NODE_ENV=development
+Step 5: Database Seeding & Mock Data
+The system comes pre-configured with a comprehensive industrial seed database in src/data/initialData.ts, containing:
+12+ Industrial Assets across multiple production lines (Injection Molding, CNC milling, Blow Molding, Air Compressors, Packaging Lines).
+Technicians & Staff Directory with skill specializations (Mechanical, Electrical, PLC/Automation).
+Industrial Spare Parts Catalog with stock levels, bin locations, and pricing in USD and Syrian Pounds (SYP).
+Historical Work Orders & Tickets showing various lifecycle stages (New, Assigned, In Progress, Awaiting Manager Sign-off, Requester Closure, Closed).
+To reset or feed initial data:
+code
+Bash
+# Data loads automatically on launch; custom seed scripts can be triggered via:
+npm run build
+Step 6: Start the Development Server
 code
 Bash
 npm run dev
-Open your browser at http://localhost:3000.
-Step 6: Build for Production Deployment
+The application will be accessible at:
 code
-Bash
-npm run build
-npm start
-4. Live Demo & Preview Links
-Vercel Host: farm-mangement-app.vercel.app
+Code
+http://localhost:3000
+4. Live Preview Links & Demonstrations
+Target	URL
+Production Preview (Shared URL)	https://ais-pre-pvzkxpxfw6md5cusxpdgct-405988954616.europe-west1.run.app
+Development URL	https://ais-dev-pvzkxpxfw6md5cusxpdgct-405988954616.europe-west1.run.app
+Core UI Modules & Screens Available in the Live Demo:
+Executive Dashboard: Real-time KPI summary (MTTR, MTBF, open vs. closed requests, critical fault monitors).
+Maintenance Requests Table & Kanban: Full status filters, technician dispatching, and live workflow modals.
+Interactive Factory Floor Map: Visual floor plan with interactive machine statuses and live fault pins.
+Machine History & Digital Passport: Machine lifecycle expenses, part replacement logs, and maintenance history.
+Technicians & Workshop Directory: Active tasks per technician, completed jobs, and workload balance.
+Spare Parts & Inventory Manager: Stock alerts, unit costs, and part usage tracking.
+Maintenance Report PDF Generator: One-click printable work order with signatures from the Technician, Maintenance Manager, and Requester.
